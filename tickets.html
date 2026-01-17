@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>احجز تذكرتك | معرض الكتاب 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --primary: #1a4d2e; --gold: #d4a373; --white: #ffffff; --light: #f8f9fa; --text: #2d2d2d; }
+        body.dark-mode { --light: #121212; --white: #1e1e1e; --text: #ffffff; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; transition: 0.3s; }
+        body { background: var(--light); color: var(--text); padding-top: 100px; }
+        nav { background: var(--white); height: 80px; display: flex; justify-content: space-between; align-items: center; padding: 0 8%; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 15px rgba(0,0,0,0.1); }
+        .ticket-card { max-width: 500px; margin: 30px auto; background: var(--white); padding: 40px; border-radius: 25px; box-shadow: 0 15px 40px rgba(0,0,0,0.1); border-right: 8px solid var(--gold); }
+        input { width: 100%; padding: 15px; margin-bottom: 20px; border: 2px solid #eee; border-radius: 12px; background: var(--light); color: var(--text); }
+        .btn-pay { width: 100%; background: var(--primary); color: white; border: none; padding: 15px; border-radius: 12px; font-weight: bold; cursor: pointer; }
+        #qr-result { display: none; text-align: center; }
+        @media print { nav, .btn-pay, footer { display: none; } body { background: white; padding: 0; } .ticket-card { box-shadow: none; border: 1px solid #ccc; } }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html" style="font-weight:900; font-size:1.6rem; color:var(--primary); text-decoration:none;">معرض القاهرة 2026</a>
+        <a href="index.html" style="text-decoration:none; color:var(--text); font-weight:700;">الرئيسية</a>
+    </nav>
+
+    <div class="ticket-card" id="form-box">
+        <h2 style="margin-bottom:20px; color:var(--primary)">احجز تذكرتك (5 جنيات)</h2>
+        <input type="text" id="uname" placeholder="الاسم بالكامل">
+        <label>عدد التذاكر:</label>
+        <input type="number" id="t-count" value="1" min="1" oninput="document.getElementById('total').innerText = this.value * 5">
+        <p style="font-weight:bold; margin-bottom:20px;">الإجمالي: <span id="total" style="color:var(--gold)">5</span> ج.م</p>
+        <button class="btn-pay" onclick="book()">تأكيد الحجز</button>
+    </div>
+
+    <div id="qr-result" class="ticket-card">
+        <h3>تم الحجز بنجاح!</h3>
+        <p id="ticket-name" style="color:var(--gold); font-weight:bold; margin:15px 0;"></p>
+        <img id="qrimg" src="" style="margin:15px 0;">
+        <p><small>برجاء تصوير الشاشة للدخول</small></p>
+        <button class="btn-pay" style="background:var(--gold); margin-top:20px" onclick="window.print()">طباعة</button>
+    </div>
+
+    <script>
+        if(localStorage.getItem('theme')==='dark') document.body.classList.add('dark-mode');
+        function book() {
+            const name = document.getElementById('uname').value;
+            if(!name) return alert("أدخل اسمك");
+            document.getElementById('form-box').style.display = 'none';
+            document.getElementById('ticket-name').innerText = "الزائر: " + name;
+            document.getElementById('qrimg').src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=CIBF-${name}`;
+            document.getElementById('qr-result').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+<!--
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حجز التذاكر | معرض القاهرة الدولي للكتاب 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --primary: #1a4d2e; --gold: #d4a373; --white: #ffffff; --light: #f8f9fa; --text: #2d2d2d; }
+        body.dark-mode { --light: #121212; --white: #1e1e1e; --text: #ffffff; }
+        
+        body { background: var(--light); color: var(--text); font-family: 'Cairo', sans-serif; margin: 0; padding-top: 100px; }
+        
+        /* Navbar */
+        nav { background: var(--white); height: 80px; display: flex; justify-content: space-between; align-items: center; padding: 0 8%; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .logo { font-weight: 900; font-size: 1.6rem; color: var(--primary); text-decoration: none; }
+
+        .ticket-container { max-width: 500px; margin: 0 auto 50px; padding: 20px; }
+        
+        .payment-card { 
+            background: var(--white); 
+            padding: 30px; 
+            border-radius: 20px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-top: 8px solid var(--primary);
+        }
+
+        .form-group { margin-bottom: 20px; text-align: right; }
+        label { display: block; margin-bottom: 8px; font-weight: bold; }
+        input { 
+            width: 100%; 
+            padding: 12px; 
+            border: 2px solid #eee; 
+            border-radius: 10px; 
+            font-family: 'Cairo'; 
+            background: var(--light);
+            color: var(--text);
+        }
+
+        /* خيارات الدفع */
+        .payment-methods { display: flex; gap: 10px; margin: 20px 0; }
+        .method { 
+            flex: 1; 
+            border: 2px solid #eee; 
+            padding: 15px; 
+            border-radius: 12px; 
+            cursor: pointer; 
+            text-align: center;
+            transition: 0.3s;
+        }
+        .method i { font-size: 1.5rem; display: block; margin-bottom: 5px; }
+        .method.active { border-color: var(--primary); background: rgba(26, 77, 46, 0.05); color: var(--primary); }
+
+        .pay-btn { 
+            background: var(--primary); 
+            color: white; 
+            width: 100%; 
+            padding: 15px; 
+            border: none; 
+            border-radius: 12px; 
+            font-size: 1.1rem; 
+            font-weight: 900; 
+            cursor: pointer; 
+            font-family: 'Cairo';
+        }
+        .pay-btn:hover { background: #2d6a4f; }
+
+        /* منطقة التذكرة بعد الدفع */
+        #final-ticket { 
+            display: none; 
+            background: var(--white); 
+            padding: 30px; 
+            border-radius: 20px; 
+            border: 2px dashed var(--gold); 
+            margin-top: 20px;
+            text-align: center;
+        }
+        .qr-placeholder { background: #eee; width: 150px; height: 150px; margin: 20px auto; display: flex; align-items: center; justify-content: center; border-radius: 10px; }
+
+        .loader { display: none; margin: 20px auto; border: 4px solid #f3f3f3; border-top: 4px solid var(--gold); border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="logo">معرض القاهرة 2026</a>
+        <div style="display:flex; gap:20px;">
+            <a href="index.html" style="text-decoration:none; color:var(--text);">الرئيسية</a>
+            <a href="tickets.html" style="text-decoration:none; color:var(--gold); font-weight:bold;">التذاكر</a>
+        </div>
+    </nav>
+
+    <div class="ticket-container">
+        <div class="payment-card" id="payment-form">
+            <h2 style="text-align:center; color:var(--primary);">حجز تذكرة الدخول</h2>
+            <p style="text-align:center; opacity:0.7;">سعر التذكرة الموحد: 5 جنيات</p>
+            <hr style="opacity:0.1; margin: 20px 0;">
+
+            <div class="form-group">
+                <label>الاسم بالكامل</label>
+                <input type="text" id="user-name" placeholder="أدخل اسمك كما في البطاقة">
+            </div>
+
+            <div class="form-group">
+                <label>البريد الإلكتروني</label>
+                <input type="email" id="user-email" placeholder="example@mail.com">
+            </div>
+
+            <label>اختر طريقة الدفع</label>
+            <div class="payment-methods">
+                <div class="method active" onclick="selectMethod(this)">
+                    <i class="fas fa-credit-card"></i> كارت بنكي
+                </div>
+                <div class="method" onclick="selectMethod(this)">
+                    <i class="fas fa-bolt"></i> فوري
+                </div>
+            </div>
+
+            <div class="loader" id="payment-loader"></div>
+            <button class="pay-btn" onclick="startPayment()">تأكيد ودفع 5 جنيات</button>
+        </div>
+
+        <div id="final-ticket">
+            <i class="fas fa-check-circle" style="color:#2ecc71; font-size: 3rem;"></i>
+            <h2 style="margin:10px 0;">تم الحجز بنجاح!</h2>
+            <p>الاسم: <span id="display-name" style="font-weight:bold;"></span></p>
+            <p>البريد: <span id="display-email"></span></p>
+            
+            <div class="qr-placeholder">
+                <img id="qr-image" src="" alt="QR Code" style="width:100%;">
+            </div>
+            
+            <p style="font-size: 0.8rem; color: #666;">يرجى الاحتفاظ بصورة التذكرة لإظهارها عند البوابة</p>
+            <button class="pay-btn" style="background:var(--gold);" onclick="window.print()">طباعة التذكرة</button>
+        </div>
+    </div>
+
+    <script>
+        // تبديل طرق الدفع
+        function selectMethod(element) {
+            document.querySelectorAll('.method').forEach(m => m.classList.remove('active'));
+            element.classList.add('active');
+        }
+
+        // محاكاة عملية الدفع
+        function startPayment() {
+            const name = document.getElementById('user-name').value;
+            const email = document.getElementById('user-email').value;
+            const loader = document.getElementById('payment-loader');
+            const btn = document.querySelector('.pay-btn');
+
+            if(!name || !email) {
+                alert("برجاء ملء جميع البيانات المطلوبة");
+                return;
+            }
+
+            // إظهار اللودر وتعطيل الزر
+            loader.style.display = "block";
+            btn.style.opacity = "0.5";
+            btn.innerText = "جاري الاتصال بالبنك...";
+
+            setTimeout(() => {
+                // إخفاء نموذج الدفع وإظهار التذكرة
+                document.getElementById('payment-form').style.display = "none";
+                document.getElementById('final-ticket').style.display = "block";
+                
+                // تعبئة بيانات التذكرة
+                document.getElementById('display-name').innerText = name;
+                document.getElementById('display-email').innerText = email;
+                
+                // توليد QR Code حقيقي بناءً على الاسم
+                const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=CIBF2026-${encodeURIComponent(name)}`;
+                document.getElementById('qr-image').src = qrUrl;
+
+                alert("تم استلام المبلغ بنجاح، تذكرتك جاهزة!");
+            }, 2500); // محاكاة انتظار البنك لمدة 2.5 ثانية
+        }
+    </script>
+</body>
+</html>-->
+
+
