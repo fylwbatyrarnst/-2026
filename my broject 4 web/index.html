@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>معرض القاهرة الدولي للكتاب 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --primary: #1a4d2e; --gold: #d4a373; --white: #ffffff; --light: #f8f9fa; --text: #2d2d2d; --grad: linear-gradient(135deg, #1a4d2e, #2d6a4f); }
+        body.dark-mode { --light: #121212; --white: #1e1e1e; --text: #ffffff; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; transition: 0.3s; }
+        body { background: var(--light); color: var(--text); padding-top: 80px; }
+        
+        /* Navigation */
+        nav { background: var(--white); height: 80px; display: flex; justify-content: space-between; align-items: center; padding: 0 8%; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 15px rgba(0,0,0,0.1); }
+        .logo { font-weight: 900; font-size: 1.6rem; color: var(--primary); text-decoration: none; display: flex; align-items: center; gap: 10px; }
+        .nav-links { display: flex; list-style: none; align-items: center; }
+        .nav-links li { margin-right: 25px; }
+        .nav-links a { text-decoration: none; color: var(--text); font-weight: 700; }
+        .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+
+        /* Hero Section */
+        .hero { height: 50vh; background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=1400') center/cover; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; text-align: center; }
+        .countdown { display: flex; gap: 15px; margin-top: 25px; }
+        .count-box { background: rgba(255,255,255,0.15); padding: 15px; border-radius: 15px; min-width: 90px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.3); }
+        .count-box span { display: block; font-size: 1.8rem; font-weight: 900; color: var(--gold); }
+
+        /* Section Titles */
+        .section-header { text-align: center; margin: 50px 0 30px; }
+        .section-header h2 { font-size: 2.2rem; color: var(--primary); font-weight: 900; position: relative; display: inline-block; padding-bottom: 10px; }
+        .section-header h2::after { content: ''; width: 60px; height: 4px; background: var(--gold); position: absolute; bottom: 0; right: 50%; transform: translateX(50%); }
+
+        /* تفاصيل المعرض - Info Grid */
+        .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; padding: 0 8%; }
+        .info-card { background: var(--white); padding: 30px; border-radius: 20px; text-align: center; box-shadow: 0 10px 20px rgba(0,0,0,0.05); border-bottom: 4px solid var(--gold); }
+        .info-card i { font-size: 2.5rem; color: var(--primary); margin-bottom: 15px; }
+        .info-card h3 { margin-bottom: 10px; color: var(--text); }
+
+        /* أهم الكتاب - Authors */
+        .authors-container { display: flex; justify-content: center; flex-wrap: wrap; gap: 40px; padding: 20px 8% 50px; }
+        .author-item { text-align: center; width: 180px; }
+        .author-item img { width: 140px; height: 140px; border-radius: 50%; object-fit: cover; border: 4px solid var(--white); box-shadow: 0 10px 20px rgba(0,0,0,0.1); margin-bottom: 15px; transition: 0.4s; }
+        .author-item:hover img { transform: scale(1.1); border-color: var(--gold); }
+        .author-item h4 { font-size: 1.2rem; color: var(--primary); }
+
+        /* أهم الكتب - Books */
+        .books-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 30px; padding: 0 8% 60px; }
+        .book-card { background: var(--white); border-radius: 20px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.05); text-align: center; }
+        .book-card img { width: 100%; height: 320px; object-fit: cover; }
+        .book-card h4 { padding: 15px 10px 5px; color: var(--text); }
+        .book-card p { padding-bottom: 15px; color: var(--gold); font-weight: bold; }
+
+        /* Footer */
+        footer { background: var(--primary); color: white; padding: 60px 8% 20px; margin-top: 50px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 30px; }
+        .footer-section a { color: white; text-decoration: none; opacity: 0.8; line-height: 2; }
+        .copyright { text-align: center; padding-top: 20px; font-size: 0.8rem; opacity: 0.6; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="logo"><i class="fas fa-book-open"></i>  معرض القاهرة 2026</a>
+        <ul class="nav-links">
+            <li><a href="index.html" class="active">الرئيسية</a></li>
+            <li><a href="publishers.html">دور النشر</a></li>
+            <li><a href="events.html">الفعاليات</a></li>
+            <li><a href="tickets.html">التذاكر</a></li>
+            <li><i class="fas fa-moon" id="dark-btn" style="cursor:pointer; color:var(--primary); font-size: 1.4rem;"></i></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <h1 style="font-size: 2.8rem; font-weight: 900;">معرض القاهرة الدولي للكتاب 2026</h1>
+        <p style="font-size: 1.2rem; margin-top: 10px;">أكبر تظاهرة ثقافية في الشرق الأوسط</p>
+        <div class="countdown">
+            <div class="count-box"><span id="days">00</span>أيام</div>
+            <div class="count-box"><span id="hours">00</span>ساعات</div>
+        </div>
+    </section>
+
+    <div class="section-header"><h2>تفاصيل الدورة 57</h2></div>
+    <div class="info-grid">
+        <div class="info-card">
+            <i class="fas fa-map-marked-alt"></i>
+            <h3>المكان</h3>
+            <p>مركز مصر للمعارض الدولية - التجمع الخامس</p>
+        </div>
+        <div class="info-card">
+            <i class="fas fa-calendar-check"></i>
+            <h3>الموعد</h3>
+            <p>من 25 يناير حتى 6 فبراير 2026</p>
+        </div>
+        <div class="info-card">
+            <i class="fas fa-clock"></i>
+            <h3>ساعات العمل</h3>
+            <p>يومياً: 10 ص - 8 م <br> الجمعة: 1 م - 9 م</p>
+        </div>
+        <div class="info-card">
+            <i class="fas fa-flag"></i>
+            <h3>ضيف الشرف</h3>
+            <p>سلطنة عُمان الشقيقة</p>
+        </div>
+    </div>
+
+    <div class="section-header"><h2>أبرز الكتاب المشاركين</h2></div>
+    <div class="authors-container">
+        <div class="author-item">
+            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="أحمد مراد">
+            <h4>أحمد مراد</h4>
+        </div>
+        <div class="author-item">
+            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="رضوى عاشور">
+            <h4>رضوى عاشور</h4>
+        </div>
+        <div class="author-item">
+            <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="يوسف زيدان">
+            <h4>يوسف زيدان</h4>
+        </div>
+        <div class="author-item">
+            <img src="https://randomuser.me/api/portraits/women/12.jpg" alt="حنان لاشين">
+            <h4>حنان لاشين</h4>
+        </div>
+    </div>
+
+    <div class="section-header"><h2>أحدث الإصدارات</h2></div>
+    <div class="books-grid">
+        <div class="book-card">
+            <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400" alt="كتاب">
+            <h4>لوكاندة بير الوطاويط</h4>
+            <p>أحمد مراد</p>
+        </div>
+        <div class="book-card">
+            <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400" alt="ثلاثية غرناطة">
+            <h4>ثلاثية غرناطة</h4>
+            <p>رضوى عاشور</p>
+        </div>
+        <div class="book-card">
+            <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?w=400" alt="كتاب">
+            <h4>يوتوبيا</h4>
+            <p>أحمد خالد توفيق</p>
+        </div>
+        <div class="book-card">
+            <img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?w=400" alt="كتاب">
+            <h4>عزازيل</h4>
+            <p>يوسف زيدان</p>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-section">
+                <h4>عن المعرض</h4>
+                <p>تأسس معرض القاهرة الدولي للكتاب عام 1969 ويعد من أكبر المعارض في العالم.</p>
+            </div>
+            <div class="footer-section">
+                <h4>روابط سريعة</h4>
+                <ul>
+                    <li><a href="publishers.html">دور النشر</a></li>
+                    <li><a href="events.html">البرنامج الثقافي</a></li>
+                    <li><a href="tickets.html">حجز التذاكر</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>تواصل معنا</h4>
+                <p><i class="fas fa-phone"></i> الخط الساخن: 19xxx</p>
+                <p><i class="fas fa-envelope"></i> info@cibf.gov.eg</p>
+            </div>
+        </div>
+        <div class="copyright">© 2026 جميع الحقوق محفوظة | معرض القاهرة الدولي للكتاب</div>
+    </footer>
+
+    <script>
+        // Dark Mode
+        const darkBtn = document.getElementById('dark-btn');
+        if(localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-mode');
+            darkBtn.classList.replace('fa-moon', 'fa-sun');
+        }
+        darkBtn.onclick = () => {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            isDark ? darkBtn.classList.replace('fa-moon', 'fa-sun') : darkBtn.classList.replace('fa-sun', 'fa-moon');
+        };
+
+        // Countdown Timer
+        setInterval(() => {
+            const gap = new Date('Jan 25, 2026').getTime() - new Date().getTime();
+            document.getElementById('days').innerText = Math.max(0, Math.floor(gap / (1000*60*60*24)));
+            document.getElementById('hours').innerText = Math.max(0, Math.floor((gap % (1000*60*60*24)) / (1000*60*60)));
+        }, 1000);
+    </script>
+</body>
+</html>
+
+
+
+
+
+

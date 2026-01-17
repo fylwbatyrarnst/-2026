@@ -1,0 +1,254 @@
+
+
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دليل الناشرين والكُتّاب | معرض الكتاب 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* المتغيرات الأساسية */
+        :root { 
+            --primary: #1a4d2e; 
+            --gold: #d4a373; 
+            --white: #ffffff; 
+            --light: #f8f9fa; 
+            --text: #2d2d2d; 
+            --nav-bg: #ffffff;
+        }
+
+        /* متغيرات الدارك مود - تم تحسينها للوضوح */
+        body.dark-mode { 
+            --light: #121212; 
+            --white: #1e1e1e; 
+            --text: #e0e0e0; 
+            --nav-bg: #181818;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; transition: 0.3s; }
+
+        body { 
+            background: var(--light); 
+            color: var(--text); 
+            padding-top: 100px;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Navbar - إصلاح اختفاء الكلام */
+        nav { 
+            background: var(--nav-bg); 
+            height: 80px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 0 8%; 
+            position: fixed; 
+            width: 100%; 
+            top: 0; 
+            z-index: 1000; 
+            box-shadow: 0 2px 15px rgba(0,0,0,0.2); 
+        }
+        .logo { font-weight: 900; font-size: 1.6rem; color: var(--primary); text-decoration: none; }
+        .nav-links { display: flex; list-style: none; gap: 25px; align-items: center; }
+        .nav-links a { 
+            text-decoration: none; 
+            color: var(--text); /* يتغير حسب المود */
+            font-weight: 700; 
+        }
+        .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+
+        .container { padding: 0 8% 40px; flex: 1; }
+        .page-title { text-align: center; margin-bottom: 40px; }
+        .page-title h1 { color: var(--primary); font-weight: 900; }
+        body.dark-mode .page-title h1 { color: var(--gold); }
+
+        /* Grid دور النشر */
+        .pub-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+        
+        .pub-card { 
+            background: var(--white); 
+            border-radius: 20px; 
+            overflow: hidden; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .pub-header { 
+            background: var(--primary); 
+            color: #fff; 
+            padding: 20px; 
+            display: flex; 
+            align-items: center; 
+            gap: 15px; 
+        }
+        .pub-header img { width: 55px; height: 55px; border-radius: 50%; background: #fff; padding: 3px; }
+
+        .pub-body { padding: 20px; }
+        .pub-location { color: var(--gold); font-weight: bold; margin-bottom: 15px; display: block; font-size: 0.9rem; }
+
+        /* إصلاح قسم الكتاب */
+        .author-box { 
+            background: rgba(0,0,0,0.03); /* لون خفيف جداً في اللايت */
+            border-radius: 12px; 
+            padding: 15px; 
+            border-right: 4px solid var(--gold);
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        body.dark-mode .author-box { 
+            background: rgba(255,255,255,0.05); /* لون خفيف في الدارك */
+        }
+        
+        .author-name { 
+            font-weight: 900; 
+            color: var(--text); /* ليكون واضحاً في الدارك واللايت */
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+        }
+
+        .books-list { 
+            max-height: 0; 
+            overflow: hidden; 
+            transition: 0.4s ease-out; 
+            font-size: 0.9rem;
+            color: var(--text);
+            opacity: 0.8;
+        }
+        .author-box.active .books-list { max-height: 200px; margin-top: 10px; }
+
+        /* Footer */
+        footer { background: var(--primary); color: white; padding: 50px 8% 20px; margin-top: 50px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; }
+        .footer-section h4 { color: var(--gold); margin-bottom: 15px; }
+        .footer-section a { color: #fff; text-decoration: none; opacity: 0.8; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="logo"><i class="fas fa-book-open"></i> معرض القاهرة 2026</a>
+        <ul class="nav-links">
+            <li><a href="index.html">الرئيسية</a></li>
+            <li><a href="publishers.html" class="active">دور النشر</a></li>
+            <li><a href="events.html">الفعاليات</a></li>
+            <li><a href="tickets.html">التذاكر</a></li>
+            <li><i class="fas fa-moon" id="dark-btn" style="cursor:pointer; color:var(--primary); font-size: 1.4rem;"></i></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="page-title">
+            <h1>دليل دور النشر والكُتّاب</h1>
+            <p>تصفح قائمة الناشرين وأهم أعمال الكُتّاب المشاركين</p>
+        </div>
+
+        <div class="pub-grid">
+            <div class="pub-card">
+                <div class="pub-header">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_x-eA1rLw_e5LhXG0n6rB_hX6m6u9z-mXpw&s" alt="الشروق">
+                    <h3>دار الشروق</h3>
+                </div>
+                <div class="pub-body">
+                    <span class="pub-location"><i class="fas fa-map-marker-alt"></i> صالة 1 - جناح B22</span>
+                    <div class="author-box" onclick="this.classList.toggle('active')">
+                        <div class="author-name">أحمد مراد <i class="fas fa-chevron-down"></i></div>
+                        <div class="books-list">
+                            <p>• لوكاندة بير الوطاويط</p>
+                            <p>• الفيل الأزرق</p>
+                            <p>• موسم صيد الغزلان</p>
+                        </div>
+                    </div>
+                    <div class="author-box" onclick="this.classList.toggle('active')">
+                        <div class="author-name">رضوى عاشور <i class="fas fa-chevron-down"></i></div>
+                        <div class="books-list">
+                            <p>• ثلاثية غرناطة</p>
+                            <p>• الطنطورية</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pub-card">
+                <div class="pub-header">
+                    <img src="https://www.nahdetmisr.com/wp-content/uploads/2021/05/logo.png" alt="نهضة مصر">
+                    <h3>نهضة مصر</h3>
+                </div>
+                <div class="pub-body">
+                    <span class="pub-location"><i class="fas fa-map-marker-alt"></i> صالة 1 - جناح A15</span>
+                    <div class="author-box" onclick="this.classList.toggle('active')">
+                        <div class="author-name">د. مصطفى محمود <i class="fas fa-chevron-down"></i></div>
+                        <div class="books-list">
+                            <p>• حوار مع صديقي الملحد</p>
+                            <p>• رحلتي من الشك إلى اليقين</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pub-card">
+                <div class="pub-header">
+                    <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=200" alt="عصير الكتب">
+                    <h3>عصير الكتب</h3>
+                </div>
+                <div class="pub-body">
+                    <span class="pub-location"><i class="fas fa-map-marker-alt"></i> صالة 2 - جناح C5</span>
+                    <div class="author-box" onclick="this.classList.toggle('active')">
+                        <div class="author-name">عمرو عبد الحميد <i class="fas fa-chevron-down"></i></div>
+                        <div class="books-list">
+                            <p>• أرض زيكولا</p>
+                            <p>• قواعد جارتين</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-section">
+                <h4>عن المعرض</h4>
+                <p>الحدث الثقافي الأبرز في القاهرة منذ عام 1969.</p>
+            </div>
+            <div class="footer-section">
+                <h4>روابط سريعة</h4>
+                <ul>
+                    <li><a href="index.html">الرئيسية</a></li>
+                    <li><a href="publishers.html">دور النشر</a></li>
+                    <li><a href="events.html">الفعاليات</a></li>
+                </ul>
+            </div>
+        </div>
+        <p style="text-align:center; margin-top:30px; opacity:0.6; font-size: 0.8rem;">© 2026 معرض القاهرة الدولي للكتاب</p>
+    </footer>
+
+    <script>
+        const darkBtn = document.getElementById('dark-btn');
+        const body = document.body;
+
+        // التحقق من الثيم المحفوظ
+        if(localStorage.getItem('theme') === 'dark') {
+            body.classList.add('dark-mode');
+            darkBtn.classList.replace('fa-moon', 'fa-sun');
+        }
+
+        darkBtn.onclick = () => {
+            body.classList.toggle('dark-mode');
+            const isDark = body.classList.contains('dark-mode');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            
+            if(isDark) {
+                darkBtn.classList.replace('fa-moon', 'fa-sun');
+            } else {
+                darkBtn.classList.replace('fa-sun', 'fa-moon');
+            }
+        };
+    </script>
+</body>
+</html>
